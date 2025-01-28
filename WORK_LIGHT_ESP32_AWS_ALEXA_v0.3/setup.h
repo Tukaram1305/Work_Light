@@ -4,8 +4,8 @@
 Serial.begin(115200);
 Serial.println("Reset i startuje!");
 
-  pinMode(32, INPUT_PULLUP);
-  pinMode(33, INPUT_PULLUP);
+  pinMode(32, INPUT_PULLUP); // PEDAL #1
+  pinMode(33, INPUT_PULLUP); // ARM POS
   
   #include "aws.h"
   wifiSetup(); // WIFI SETUP

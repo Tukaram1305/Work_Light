@@ -1,4 +1,4 @@
-// Markowiak Pawel ARR 2025 v0.1
+// Markowiak Pawel ARR 2025 v0.3
 // WIFI CONSTS n BASE LIBS
 #include <Arduino.h>
 #include <WiFi.h>
@@ -11,36 +11,7 @@
 #include "Kronos.h"
 
 //GLOBALNE
-const char* ssid = "RagNet";
-const char* password =  "azgard666";
-// spobuje ustawic statyczne IP
-IPAddress local_IP(192, 168, 1, 81);
-IPAddress gateway(192, 168, 1 ,1);
-IPAddress subnet(255, 255, 255, 0);
-IPAddress primaryDNS(8, 8, 8, 8); 
-IPAddress secondaryDNS(8, 8, 4, 4);
-enum START_POS_DEF {VERT=0, HOR=1};
-START_POS_DEF st_pos = VERT;
-bool isSerRegulating{0};
-bool isPedalReleased{1};
-Kronos pedalDel;
-int SERPOS{0};
-bool serCurrPos{0};
-const int servoPin{25};
-bool currAlexaState{0};
-byte currAlexaVal{0};
-const char* ALX_DEV1_NAME = {"Work Light"};
-//RAINBOW FX
-Kronos rbowdel;
-volatile uint16_t rbowDel{3000};
-volatile bool rbowState{0};
-volatile uint16_t rbowLightness{128}; // uzywa RB1 i RB2
-
-Kronos rbowSTdel;
-volatile uint16_t rbowSLDel{40};
-volatile bool rbowSTState{0};
-volatile byte RBSThue1{0};
-volatile byte RBSThue2offset{128};
+#include "VARS.h"
 
 // MY LIBS
 #include "ColorConv.h"
@@ -59,10 +30,9 @@ LEDSY leds(13,14,12,     15,16,17, 120);
 
 #include "funcsdefs.h"
 
-
-void setup() {
-  #include "setup.h" // SETUP
-}
+void setup() { 
+  #include "setup.h" 
+  } // SETUP
 
 void loop() {
 
@@ -77,8 +47,6 @@ if (isPedalReleased==1 && check_pedal() && !isSerRegulating && pedalDel.del(250)
   isPedalReleased = 0;
   // AKCJA po WCISNIECIU
   pedalDel.CNT();
-  //leds(1, random(0,255), 255, 128);
-  
 }
 if (isPedalReleased==0 && !check_pedal() && !isSerRegulating ) // Zwolniony
 {
