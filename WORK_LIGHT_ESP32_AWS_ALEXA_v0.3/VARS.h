@@ -1,8 +1,8 @@
 #ifndef VARS_H
 #define VARS_H
 // WIFI/ALEXA
-const char* ssid = "RagNet";
-const char* password =  "azgard666";
+const char* ssid = "<SSID>";
+const char* password =  "<PASS>";
 // spobuje ustawic statyczne IP
 IPAddress local_IP(192, 168, 1, 81);
 IPAddress gateway(192, 168, 1 ,1);
