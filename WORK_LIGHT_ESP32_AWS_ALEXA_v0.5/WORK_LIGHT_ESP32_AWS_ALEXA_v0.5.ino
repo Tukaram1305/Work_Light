@@ -53,17 +53,23 @@ if (isPedalReleased==0 && !check_pedal() && !isSerRegulating ) // Zwolniony
   isPedalReleased=1; 
   // AKCJA po WCISNIECIU
   unsigned long P_TIMER = pedalDel.STP();
-  if (P_TIMER < 350)
+
+  if (P_TIMER > 25 && P_TIMER < 350)
   {
     leds(1, random(0,255), 255, 128);
     leds(0, random(0,255), 255, 64);
   }
   else if (P_TIMER >=350 && P_TIMER <1500)
   {
+    leds(1, 4,  50, 254);
+    leds(0, 8, 240, 128);
+  }
+  else if (P_TIMER >=1500 && P_TIMER <2500)
+  {
     leds(1, 1, 255, 0);
     leds(0, 1, 255, 0);
   }
-  else if (P_TIMER >=1500)
+  else if (P_TIMER >=2500)
   {
     if (serCurrPos==0) { serCurrPos=1; ser.serMove(ser.getLowerLimit()); }
     else if (serCurrPos==1) { serCurrPos=0; ser.serMove(ser.getUpperLimit()); }

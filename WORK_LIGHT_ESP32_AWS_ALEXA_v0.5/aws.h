@@ -16,6 +16,14 @@ server.on("/ledsOff", HTTP_GET, [](AsyncWebServerRequest *request){
   Serial.println("Leds Off");
 });
 
+server.on("/random", HTTP_GET, [](AsyncWebServerRequest *request){
+  leds(1, random(0,255), 255, 128);
+  leds(0, random(0,255), 255, 64);
+  String form {"Leds Rand"};
+  request->send(200, "application/json",form.c_str());
+  Serial.println("Leds Rand");
+});
+
 server.on("/setSer", HTTP_GET, [] (AsyncWebServerRequest *request) {
   if (request->hasParam("v")) 
   {
