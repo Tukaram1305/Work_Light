@@ -14,7 +14,7 @@ class Kronos
    * 
    * CNT          - void              - zacznij odliczanie
    * STP          - czas (mili)       - stop odliczanie
-   * 
+   *               unsigned long
    * ONCE         - bool (true)       - true jezeli raz wykonalo
    * ONCE_RES     - void              - resetuj ONCE
    */ // NAPRAWIONY OVERFLOW m-last > del

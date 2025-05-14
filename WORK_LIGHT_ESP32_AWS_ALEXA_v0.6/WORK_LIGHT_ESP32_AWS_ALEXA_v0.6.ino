@@ -35,6 +35,7 @@ void setup() {
   } // SETUP
 
 Kronos bt;
+unsigned long PUSHACTION{0};
 
 void loop() {
 
@@ -45,13 +46,16 @@ leds.handle();
 
 //PEDAL
 if (isPedalReleased==1 && check_pedal() && pedalDel.del(2) ) // Wcisniety
-{ isPedalReleased = 0; }
+{ isPedalReleased = 0; PUSHACTION = millis(); }
 
 if (isPedalReleased==0 && !check_pedal() && pedalDel.del(2) ) // Zwolniony
 {
-  isPedalReleased = 1;
-  pedalClickCounter += 1;
-  pedalTimer = millis();
+  if (millis() - PUSHACTION >= 10 ) // zabezpieczenie przed spadkiem napiecia
+  {
+    isPedalReleased = 1;
+    pedalClickCounter += 1;
+    pedalTimer = millis();
+  }
 }
 
 if (millis()-pedalTimer > pedalReleaseTime && pedTimesUp==false && pedalClickCounter > 0)
